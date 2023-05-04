@@ -5,15 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
+use App\Http\Services\ItemServiceInterface;
+use Inertia\Inertia;
 
 class ItemController extends Controller
 {
+    public function __construct(private ItemServiceInterface $itemService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $items = $this->itemService->getItemSelect();
+
+        return Inertia::render('Items/Index',['items' => $items]);
     }
 
     /**
@@ -21,7 +29,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Items/Create');
     }
 
     /**
@@ -29,7 +37,13 @@ class ItemController extends Controller
      */
     public function store(StoreItemRequest $request)
     {
-        //
+        $this->itemService->createItem(
+            $request->getName(),
+            $request->getMemo(),
+            $request->getPrice(),
+        );
+        
+        return to_route('items.index');
     }
 
     /**

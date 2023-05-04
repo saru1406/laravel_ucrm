@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class StoreItemRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreItemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,24 @@ class StoreItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required','max:30','string'],
+            'memo' => ['required', 'max:255', 'string'],
+            'price' => ['required', 'numeric', 'int']
         ];
+    }
+
+    public function getName()
+    {
+        return $this->input('name');
+    }
+
+    public function getMemo()
+    {
+        return $this->input('memo');
+    }
+
+    public function getPrice()
+    {
+        return $this->input('price');
     }
 }
