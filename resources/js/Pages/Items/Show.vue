@@ -1,0 +1,67 @@
+<script setup>
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Head, Link } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
+
+defineProps({
+    item: Array
+})
+
+const deleteItem = id => {
+    router.delete(route('items.destroy', { item: id }));
+}
+
+</script>
+
+<template>
+    <Head title="商品詳細" />
+
+    <AuthenticatedLayout>
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">商品詳細</h2>
+        </template>
+
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+                        <section class="text-gray-600 body-font relative">
+                            <div class="container px-5 py-5 mx-auto">
+                                <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                                    <div class="flex flex-wrap -m-2">
+                                        <div class="p-2 w-full">
+                                        <div class="relative">
+                                            <label for="name" class="leading-7 text-sm text-gray-600">商品名</label>
+                                            <div class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                {{ item.name }}
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="p-2 w-full">
+                                        <div class="relative">
+                                            <label for="memo" class="leading-7 text-sm text-gray-600">商品詳細</label>
+                                            <div class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">
+                                                {{ item.memo }}
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="p-2 w-full">
+                                        <div class="relative">
+                                            <label for="price" class="leading-7 text-sm text-gray-600">値段</label>
+                                            <div class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">
+                                                {{ item.price }}
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <Link as="botton" :href="route('items.edit', {item: item})" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">商品編集</Link>
+                                        <button @click="deleteItem(item.id)" class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">商品削除</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </AuthenticatedLayout>
+</template>

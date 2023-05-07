@@ -11,7 +11,7 @@ class UpdateItemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,30 @@ class UpdateItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required','max:30','string'],
+            'memo' => ['required', 'max:255', 'string'],
+            'price' => ['required', 'numeric', 'int'],
+            'is_selling' => ['required', 'int']
         ];
+    }
+
+    public function getName()
+    {
+        return $this->input('name');
+    }
+
+    public function getMemo()
+    {
+        return $this->input('memo');
+    }
+
+    public function getPrice()
+    {
+        return $this->input('price');
+    }
+
+    public function getIsSelling()
+    {
+        return $this->input('is_selling');
     }
 }

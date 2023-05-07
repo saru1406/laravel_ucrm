@@ -38,4 +38,25 @@ class ItemService implements ItemServiceInterface
             $getPrice,
         );
     }
+
+    public function updateItem(
+        $itemId,
+        $getName,
+        $getMemo,
+        $getPrice,
+        $getIsSelling,
+    ){
+        $this->itemRepository->updateItem(
+            $itemId,
+            $getName,
+            $getMemo,
+            $getPrice,
+            $getIsSelling,
+        );
+    }
+
+    public function deleteItem($itemId)
+    {
+        $this->itemRepository->deleteItem($itemId);
+    }
 }

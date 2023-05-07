@@ -18,4 +18,14 @@ interface ItemServiceInterface
         $getMemo,
         $getPrice,
     );
+
+    public function updateItem(
+        $itemId,
+        $getName,
+        $getMemo,
+        $getPrice,
+        $getIsSelling,
+    );
+
+    public function deleteItem($itemId);
 }
