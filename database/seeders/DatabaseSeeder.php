@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ItemSeeder::class,
             CustomerSeeder::class,
+            PurchaseSeeder::class,
+            ItemPurchaseSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 
