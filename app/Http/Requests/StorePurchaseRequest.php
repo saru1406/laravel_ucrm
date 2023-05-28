@@ -11,7 +11,7 @@ class StorePurchaseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,32 @@ class StorePurchaseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'customer_id' => ['required']
         ];
+    }
+
+    public function getCustomerById()
+    {
+        return $this->input('customer_id');
+    }
+
+    public function getDate()
+    {
+        return $this->input('date');
+    }
+
+    public function  getStatus()
+    {
+        return $this->input('status');
+    }
+
+    public function getItems()
+    {
+        return $this->input('items');
+    }
+
+    public function getSearch()
+    {
+        return $this->input('search');
     }
 }
