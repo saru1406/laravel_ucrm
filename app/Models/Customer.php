@@ -18,4 +18,9 @@ class Customer extends Model
             return $query;
         }
     }
+
+    public function purchases()
+    {
+        return $this->hasMany(purchase::class);
+    }
 }

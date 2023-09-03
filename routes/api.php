@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Requests\SearchCustomerRequest;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->get('/searchCustomers', function (SearchCustomerRequest $request) {
+    return Customer::customerSearch($request->getSearch())->paginate(10);
 });
